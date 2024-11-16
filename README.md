@@ -73,8 +73,7 @@ La solución se divide en los siguientes componentes:
    git clone https://github.com/tu-usuario/credit-card-management.git
 2. **Ejecutar los scripts del archivo scriptDatabase.sql **:
 3. **Ve a CreditCardAPI/appsettings.json y actualiza la cadena de conexión**:
-   "ConnectionStrings": {
-  "DefaultConnection": "Data Source=TU_SERVIDOR;Initial Catalog=CreditCardAccount;User ID=TU_USUARIO;Password=TU_PASSWORD;"
-}
+      ```bash
+   "ConnectionStrings": { "DefaultConnection": "Data Source=TU_SERVIDOR;Initial Catalog=CreditCardAccount;User ID=TU_USUARIO;Password=TU_PASSWORD;"}
 
 
