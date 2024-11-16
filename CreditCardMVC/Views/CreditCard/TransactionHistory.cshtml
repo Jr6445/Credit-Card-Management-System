@@ -1,0 +1,39 @@
+﻿@model List<CreditCardMVC.Models.ViewModels.TransactionViewModel>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Historial de Transacciones</h1>
+
+    <!-- Tabla Estilizada -->
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-danger">
+                <tr>
+                    <th>Fecha</th>  
+                    <th>Descripción</th>
+                    <th>Tipo</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in Model)
+                {
+                    <tr>
+                        <td>@transaction.TransactionDate.ToString("dd/MM/yyyy")</td>
+                        <td>@transaction.Description</td>
+                        <td>
+                            <span class="badge @(transaction.TransactionType == "Compra" ? "bg-danger" : "bg-success")">
+                                @transaction.TransactionType
+                            </span>
+                        </td>
+                        <td class="text-end">$@transaction.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón de regreso -->
+    <div class="mt-4 text-center">
+        <a href="/CreditCard/Statement/1" class="btn text-white" style="background-color: #da2129;">Volver al Estado de Cuenta</a>
+    </div>
+</div>

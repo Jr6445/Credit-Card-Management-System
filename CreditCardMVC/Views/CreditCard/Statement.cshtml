@@ -1,0 +1,72 @@
+﻿@model CreditCardMVC.Models.ViewModels.CreditCardStatementViewModel
+
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Estado de Cuenta</h1>
+
+    <!-- Sistema de cuadrículas para organizar las tarjetas -->
+    <div class="row g-4">
+        <!-- Información del Titular -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #da2129;">
+                    Información del Titular
+                </div>
+                <div class="card-body">
+                    <p><strong>Nombre del Titular:</strong> @Model.CardHolderName</p>
+                    <p><strong>Número de Tarjeta:</strong> @Model.CardNumber</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información Financiera -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #da2129;">
+                    Información Financiera
+                </div>
+                <div class="card-body">
+                    <p><strong>Límite de Crédito:</strong> $@Model.CreditLimit</p>
+                    <p><strong>Saldo Total:</strong> $@Model.CurrentBalance</p>
+                    <p><strong>Saldo Disponible:</strong> $@Model.AvailableBalance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen de Compras -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #da2129;">
+                    Resumen de Compras
+                </div>
+                <div class="card-body">
+                    <p><strong>Total Compras Este Mes:</strong> $@Model.TotalPurchasesThisMonth</p>
+                    <p><strong>Total Compras Mes Anterior:</strong> $@Model.TotalPurchasesLastMonth</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cálculos Financieros -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #da2129;">
+                    Cálculos Financieros
+                </div>
+                <div class="card-body">
+                    <p><strong>Porcentaje Interés Configurable:</strong> 25%</p>
+                    <p><strong>Interés Bonificable:</strong> $@Model.InterestAmount</p>
+                    <p><strong>Porcentaje Configurable Saldo Mínimo:</strong> 5%</p>
+                    <p><strong>Cuota Mínima a Pagar:</strong> $@Model.MinimumPayment</p>
+                    <p><strong>Total a Pagar:</strong> $@Model.CurrentBalance</p>
+                    <p><strong>Total con Intereses:</strong> $@Model.TotalWithInterest</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="mt-4 text-center">
+        <a href="/CreditCard/AddTransaction" class="btn text-white" style="background-color: #da2129;">Agregar Compra</a>
+        <a href="/CreditCard/AddPayment" class="btn text-white" style="background-color: #da2129;">Registrar Pago</a>
+        <a href="/CreditCard/TransactionHistory/1" class="btn text-white" style="background-color: #da2129;">Ver Historial de Transacciones</a>
+    </div>
+</div>
