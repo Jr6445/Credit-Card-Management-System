@@ -1,74 +1,62 @@
--- Crear la base de datos CreditCardAccount
 USE [master]
 GO
+
 CREATE DATABASE [CreditCardAccount]
 GO
 
--- Crear tabla CreditCardHolders
--- Esta tabla almacena información de los titulares de tarjetas de crédito.
--- Incluye:
--- - CardHolderID: Identificador único del titular.
--- - Name: Nombre del titular.
--- - CardNumber: Número único de la tarjeta.
--- - CreditLimit: Límite de crédito asignado al titular.
--- - CurrentBalance: Saldo actual de la tarjeta.
--- - AvailableBalance: Saldo disponible calculado como (CreditLimit - CurrentBalance).
 CREATE TABLE [dbo].[CreditCardHolders](
 	[CardHolderID] [int] NOT NULL,
-	L,
-	[CreditLNULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[CardNumber] [nvarchar](16) NOT NULL,
+	[CreditLimit] [decimal](18, 2) NOT NULL,
 	[CurrentBalance] [decimal](18, 2) NOT NULL,
 	[AvailableBalance]  AS ([CreditLimit]-[CurrentBalance]),
- CONSTRAINT [PK__CreditCa__05A1440B2944D44C] PRIMARY KEY CLUSTERED ([CardHolderID] ASC),
- CONSTRAINT [UQ__CreditCa__A4E9FFE9300B7AF3] UNIQUE NONCLUSTERED ([CardNumber] ASC)
+ CONSTRAINT [PK__CreditCa__05A1440B2944D44C] PRIMARY KEY CLUSTERED 
+(
+	[CardHolderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ__CreditCa__A4E9FFE9300B7AF3] UNIQUE NONCLUSTERED 
+(
+	[CardNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
--- Crear tabla Transactions
--- Esta tabla almacena todas las transacciones realizadas con las tarjetas.
--- Incluye:
--- - TransactionID: Identificador único de la transacción.
--- - CardHolderID: Identificador del titular relacionado.
--- - TransactionDate: Fecha de la transacción.
--- - Description: Descripción de la transacción.
--- - TransactionType: Tipo de transacción ('Compra' o 'Pago').
--- - Amount: Monto de la transacción.
 CREATE TABLE [dbo].[Transactions](
 	[TransactionID] [int] IDENTITY(1,1) NOT NULL,
 	[CardHolderID] [int] NOT NULL,
 	[TransactionDate] [date] NOT NULL,
-	  NULL,
-	[TransactionType] [nvarchar](10) NULL,OT NULL,tionID] ASC)
+	[Description] [nvarchar](255) NULL,
+	[TransactionType] [nvarchar](10) NULL,
+	[Amount] [decimal](18, 2) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TransactionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
--- Relación entre CreditCardHolders y Transactions
 ALTER TABLE [dbo].[Transactions]  WITH CHECK ADD  CONSTRAINT [FK__Transacti__CardH__276EDEB3] FOREIGN KEY([CardHolderID])
 REFERENCES [dbo].[CreditCardHolders] ([CardHolderID])
 GO
+
 ALTER TABLE [dbo].[Transactions] CHECK CONSTRAINT [FK__Transacti__CardH__276EDEB3]
 GO
 
--- Validar que TransactionType solo acepte 'Compra' o 'Pago'
 ALTER TABLE [dbo].[Transactions]  WITH CHECK ADD CHECK  (([TransactionType]='Pago' OR [TransactionType]='Compra'))
 GO
 
--- Crear tabla Configurations
--- Esta tabla almacena configuraciones generales como tasas de interés y porcentaje mínimo de pago.
--- Incluye:
--- - ConfigID: Identificador único de configuración.
--- - InterestRate: Tasa de interés (en porcentaje).
--- - MinimumPaymentRate: Porcentaje mínimo de pago (en porcentaje).
 CREATE TABLE [dbo].[Configurations](
 	[ConfigID] [int] IDENTITY(1,1) NOT NULL,
 	[InterestRate] [decimal](5, 2) NOT NULL,
 	[MinimumPaymentRate] [decimal](5, 2) NOT NULL,
-PRIMARY KEY CLUSTERED ([ConfigID] ASC)
+PRIMARY KEY CLUSTERED 
+(
+	[ConfigID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
--- Procedimiento almacenado AddTransaction
--- Inserta una nueva transacción y actualiza el saldo del titular.
 CREATE PROCEDURE [dbo].[AddTransaction]
     @CardHolderID INT,
     @TransactionDate DATE,
@@ -85,7 +73,7 @@ BEGIN
         THROW 51000, 'TransactionType debe ser Compra o Pago.', 1;
     END;
 
-    -- Validar saldo antes de realizar un pago
+    -- Evitar que el saldo sea menor a 0 después de un pago
     IF @TransactionType = 'Pago'
     BEGIN
         DECLARE @CurrentBalance DECIMAL(18, 2);
@@ -117,8 +105,6 @@ BEGIN
 END;
 GO
 
--- Procedimiento almacenado GetCreditCardStatement
--- Genera el estado de cuenta detallado del titular.
 CREATE PROCEDURE [dbo].[GetCreditCardStatement]
     @CardHolderID INT
 AS
@@ -140,7 +126,7 @@ BEGIN
     FROM CreditCardHolders c
     WHERE c.CardHolderID = @CardHolderID;
 
-    -- Cálculos financieros
+    -- Cálculos financieros (evitar negativos)
     SELECT 
         CurrentBalance AS TotalBalance,
         CASE WHEN CurrentBalance > 0 THEN CurrentBalance * (@InterestRate / 100) ELSE 0 END AS InterestAmount,
@@ -190,8 +176,7 @@ BEGIN
 END;
 GO
 
--- Procedimiento almacenado GetTransactionHistory
--- Obtiene el historial de transacciones del mes actual.
+-- Procedimiento almacenado: Obtener historial de transacciones del mes
 CREATE PROCEDURE [dbo].[GetTransactionHistory]
     @CardHolderID INT
 AS

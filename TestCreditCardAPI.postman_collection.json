@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "affad6b8-7fe7-4413-aa26-a07ec1600819",
+		"name": "TestCreditCardAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27970364"
+	},
+	"item": [
+		{
+			"name": "GetStatement",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "TransactionList",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "AddTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cardHolderID\": 1,\r\n  \"transactionDate\": \"2024-11-16\",\r\n  \"description\": \"Compra Comida\",\r\n  \"transactionType\": \"Compra\",\r\n  \"amount\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44309/api/CreditCard/transactions",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44309",
+					"path": [
+						"api",
+						"CreditCard",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
