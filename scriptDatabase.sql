@@ -4,6 +4,8 @@ GO
 CREATE DATABASE [CreditCardAccount]
 GO
 
+use [CreditCardAccount]
+
 CREATE TABLE [dbo].[CreditCardHolders](
 	[CardHolderID] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
@@ -198,3 +200,9 @@ BEGIN
         TransactionDate DESC;
 END;
 GO
+
+INSERT INTO CreditCardHolders (CardHolderID, Name, CardNumber, CreditLimit, CurrentBalance)
+VALUES (1, 'Jose Bonilla', 9643929065058129, 1000.00, 00.00);
+
+
+select * from CreditCardHolders
