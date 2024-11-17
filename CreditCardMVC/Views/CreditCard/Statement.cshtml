@@ -3,70 +3,93 @@
 <div class="container mt-4">
     <h1 class="mb-4 text-center">Estado de Cuenta</h1>
 
-    <!-- Sistema de cuadrículas para organizar las tarjetas -->
-    <div class="row g-4">
-        <!-- Información del Titular -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-white" style="background-color: #da2129;">
-                    Información del Titular
+    <!-- Barra de progreso y titular -->
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <h5>@Model.CardHolderName</h5>
+            <p>**** **** **** @Model.CardNumber</p>
+            <div class="row text-center">
+                <div class="col">
+                    <p><strong>Saldo Actual:</strong> $@Model.CurrentBalance</p>
                 </div>
-                <div class="card-body">
-                    <p><strong>Nombre del Titular:</strong> @Model.CardHolderName</p>
-                    <p><strong>Número de Tarjeta:</strong> @Model.CardNumber</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Información Financiera -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-white" style="background-color: #da2129;">
-                    Información Financiera
-                </div>
-                <div class="card-body">
-                    <p><strong>Límite de Crédito:</strong> $@Model.CreditLimit</p>
-                    <p><strong>Saldo Total:</strong> $@Model.CurrentBalance</p>
+                <div class="col">
                     <p><strong>Saldo Disponible:</strong> $@Model.AvailableBalance</p>
                 </div>
+                <div class="col">
+                    <p><strong>Límite de Crédito:</strong> $@Model.CreditLimit</p>
+                </div>
+            </div>
+            <div class="progress mt-3" style="height: 25px;font-size: 15px;">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     style="width: @(Model.CurrentBalance / Model.CreditLimit * 100)%;"
+                     aria-valuenow="@(Model.CurrentBalance)"
+                     aria-valuemin="0"
+                     aria-valuemax="@(Model.CreditLimit)">
+                    $@Model.CurrentBalance / $@Model.CreditLimit
+                </div>
             </div>
         </div>
-
+    </div>
+    <!-- Tarjetas de información -->
+    <div class="row g-4">
         <!-- Resumen de Compras -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
-                <div class="card-header text-white" style="background-color: #da2129;">
+                <div class="card-header bg-danger text-white">
                     Resumen de Compras
                 </div>
                 <div class="card-body">
-                    <p><strong>Total Compras Este Mes:</strong> $@Model.TotalPurchasesThisMonth</p>
-                    <p><strong>Total Compras Mes Anterior:</strong> $@Model.TotalPurchasesLastMonth</p>
+                    <p><strong>Este Mes:</strong> $@Model.TotalPurchasesThisMonth</p>
+                    <p><strong>Mes Anterior:</strong> $@Model.TotalPurchasesLastMonth</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pago Mínimo -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    Pago Mínimo
+                </div>
+                <div class="card-body">
+                    <p><strong>Pago Mínimo:</strong> $@String.Format("{0:F2}",Model.MinimumPayment)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interés Bonificable -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    Interés Bonificable
+                </div>
+                <div class="card-body">
+                    <p><strong>Interés Bonificable:</strong> $@String.Format("{0:F2}",Model.InterestAmount)</p>
                 </div>
             </div>
         </div>
 
         <!-- Cálculos Financieros -->
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header text-white" style="background-color: #da2129;">
+                <div class="card-header bg-danger text-white">
                     Cálculos Financieros
                 </div>
                 <div class="card-body">
                     <p><strong>Porcentaje Interés Configurable:</strong> 25%</p>
-                    <p><strong>Interés Bonificable:</strong> $@Model.InterestAmount</p>
+                    <p><strong>Interés Bonificable:</strong> $@String.Format("{0:F2}",Model.InterestAmount)</p>
                     <p><strong>Porcentaje Configurable Saldo Mínimo:</strong> 5%</p>
-                    <p><strong>Cuota Mínima a Pagar:</strong> $@Model.MinimumPayment</p>
-                    <p><strong>Total a Pagar:</strong> $@Model.CurrentBalance</p>
-                    <p><strong>Total con Intereses:</strong> $@Model.TotalWithInterest</p>
+                    <p><strong>Cuota Mínima a Pagar:</strong> $@String.Format("{0:F2}",Model.MinimumPayment)</p>
+                    <p><strong>Total a Pagar:</strong> $@String.Format("{0:F2}",Model.CurrentBalance)</p>
+                    <p><strong>Total con Intereses:</strong> $@String.Format("{0:F2}",Model.TotalWithInterest)</p>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Botones de Acción -->
-    <div class="mt-4 text-center">
-        <a href="/CreditCard/AddTransaction" class="btn text-white" style="background-color: #da2129;">Agregar Compra</a>
-        <a href="/CreditCard/AddPayment" class="btn text-white" style="background-color: #da2129;">Registrar Pago</a>
-        <a href="/CreditCard/TransactionHistory/1" class="btn text-white" style="background-color: #da2129;">Ver Historial de Transacciones</a>
+    <div class="text-center mt-4">
+        <a href="/CreditCard/AddTransaction" class="btn btn-danger">Agregar Compra</a>
+        <a href="/CreditCard/AddPayment" class="btn btn-danger">Registrar Pago</a>
+        <a href="/CreditCard/TransactionHistory/1" class="btn btn-danger">Ver Historial de Transacciones</a>
     </div>
 </div>

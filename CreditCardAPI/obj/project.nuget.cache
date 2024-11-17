@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0qehN9e+K6OuuJtbNwa/DwTN/r2H0Y6uVfWlYpMJa9n3SP9BDvZifGATzvDvX9HP2e42mH0IpayBxLvcXpIY1A==",
+  "dgSpecHash": "P/tbYqb9+RVt8ZxUobrTYDvimNS7hgPkxriS4n3E9gFLgh+fpbUO6+O30sTvWjDL+F5Nw/Y9Xb4LYMSdFgJ4wA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\CreditCardAPI.csproj",
+  "projectFilePath": "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\CreditCardAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Riveraa\\.nuget\\packages\\aspnetcore.healthchecks.sqlserver\\8.0.2\\aspnetcore.healthchecks.sqlserver.8.0.2.nupkg.sha512",
     "C:\\Users\\Riveraa\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",

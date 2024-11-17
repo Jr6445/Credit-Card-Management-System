@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\CreditCardAPI.csproj": {}
+    "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\CreditCardAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\CreditCardAPI.csproj": {
+    "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\CreditCardAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\CreditCardAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\CreditCardAPI.csproj",
         "projectName": "CreditCardAPI",
-        "projectPath": "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\CreditCardAPI.csproj",
+        "projectPath": "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\CreditCardAPI.csproj",
         "packagesPath": "C:\\Users\\Riveraa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardAPI\\obj\\",
+        "outputPath": "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"

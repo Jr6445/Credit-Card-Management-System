@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q7hIFUIuaiVbArXPNjLmSEp+QOwgTZn9R5Hz2UiWRM4vEbASm+ecKdUrxizGe6b2jRkjUoM21dfaW3KnxP42bA==",
+  "dgSpecHash": "cDoGCwaDoEmgBxzmYGdBMdgnDBwCftmLPhDABg89LYcRBjtlYt20296DCtk8JGDdgSUs79qHMkuq4b8vxjc3ZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Riveraa\\source\\repos\\CreditCardSolution\\CreditCardMVC\\CreditCardMVC.csproj",
+  "projectFilePath": "C:\\Users\\Riveraa\\source\\repos\\Credit-Card-Management-System\\CreditCardMVC\\CreditCardMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Riveraa\\.nuget\\packages\\dinktopdf\\1.0.8\\dinktopdf.1.0.8.nupkg.sha512",
     "C:\\Users\\Riveraa\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
